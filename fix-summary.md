@@ -24,7 +24,7 @@ Button Functionality & Semantics:
 Using <button> for "View Details" might be semantically incorrect if it only acts as a link.
 
 
-Accessibility (a11y):
+Accessibility:
 Main hackathon image lacked descriptive alt text.
 Informational icons (location, date, etc.) lacked screen reader labels (aria-label).
 "View More" button didn't announce its expanded/collapsed state (aria-expanded).
