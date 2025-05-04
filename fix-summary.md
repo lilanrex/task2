@@ -72,7 +72,7 @@ Suggestions:
 
 Improve date handling (use Date objects, formatting libraries like date-fns, show relative time).
 Implement loading states (e.g., skeleton loaders) while data is fetching.
-Enhance semantic structure by wrapping the card content in an <article> tag.
+Enhance semantic structure by wrapping the card content in an article tag.
 Use next/link for the "View Details" button if it navigates within the Next.js application.
 Extract the status badge into its own reusable component.
 Add unit/integration tests to verify card rendering with different data variations.
