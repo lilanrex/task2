@@ -32,9 +32,9 @@ The status text itself was shown exactly as it came in (e.g., "upcoming") instea
 Using a <button> for "View Details" might not have been the best choice if it's just meant to link somewhere.
 How I Fixed It:
 
-I went through and saddressed some of these points:
+I went through and addressed some of these points:
 
-Made Core Info Required: I updated the code (props) so that things like the name, imageUrl, startDate, endDate, and status must be provided. No more broken-looking cards due to missing basics!
+Made Core Info Required: I updated the code (props) so that things like the name, imageUrl, startDate, endDate, and status must be provided. 
 Cleaned Up Display:
 Now, the location icon and text only show up if a location is actually provided.
 Same for dates – the date line only renders if we have both start and end dates.
@@ -42,7 +42,7 @@ Fixed the participants text to handle zero, one, or many participants correctly 
 Made sure the description only gets "..." if it's truly cut short, and the "View More" button only appears when needed. Also added the right signals (aria-expanded) for screen readers on that button.
 Made Buttons Work:
 Set the "View Details" button type correctly.
-Hooked it up so it either runs a function we pass in (onViewDetails) or links to a URL (hackathonUrl). If neither is available, the button is now disabled so users aren't clicking a dead end.
+Hooked it up so it either runs a function we pass in (onViewDetails) or links to a URL (hackathonUrl). If neither is available, the button is now disabled so users aren't clicking on it.
 Gave it a clearer label for screen readers (e.g., View Details for CoolHack 2025
 Improved Accessibility:
 Added descriptive alt text to the main image like "Banner image for CoolHack 2025.
