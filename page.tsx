@@ -1,4 +1,4 @@
-// Example: pages/index.tsx (or app/page.tsx)
+
 
 import { HackathonCard } from '../components/HackathonCard'; 
 
