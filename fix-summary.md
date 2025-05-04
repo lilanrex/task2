@@ -1,6 +1,6 @@
 Hi,
 
-I spent some time working on the HackathonCard component and wanted to share what I found and fixed up.
+After checking the HackathonCard component, here are some of the issues I found and fixed.
 
 What Needed Fixing:
 
