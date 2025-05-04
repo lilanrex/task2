@@ -6,63 +6,80 @@ What Needed Fixing:
 
 Basically, there were a few awkward spots and potential issues:
 
-Weird Display:
-
-The  location pin icon showed up even if there was no location text next to it.
-
-The participants count could say "undefined Participants" and didn't handle the difference between "1 Participant" and "5 Participants".
-The description sometimes got added even when it wasn't actually shortened.
-The "View More" / "Show Less" button for the description appeared all the time, even when the description was super short and didn't need expanding.
-Button Problems:
-
-The "View Details" button didn't actually do anything and wasn't properly set up as a button (which can mess with forms sometimes).
-Accessibility:
-
-The main hackathon image was missing a description for screen readers bad for accessibility.
-
-The icons for location, date, etc., weren't labeled for screen readers.
-The "View More" button didn't tell screen readers if the description was currently expanded or collapsed.
-The "View Details" button could have been clearer for screen readers too.
+Conditional Display:
+Location icon/text showed even with no location data.
+Date information showed even if start/end dates were missing.
+The "View More" / "Show Less" button for descriptions displayed even for short descriptions not needing expansion.
 
 
-Some really important details for the card (like name, image, dates, status) weren't marked as required, meaning we could accidentally try to show a card without them.
-The card had a fixed width, so it wouldn't resize nicely on smaller screens or different devices.
-The text color on the status badge (like "Upcoming") wasn't explicitly set, so it could be hard to read depending on the badge's background color.
-The status text itself was shown exactly as it came in (e.g., "upcoming") instead of being nicely formatted ("Upcoming").
-Using a <button> for "View Details" might not have been the best choice if it's just meant to link somewhere.
-How I Fixed It:
+Data Handling & Formatting:
+Participants count displayed "undefined" and didn't handle pluralization (0, 1, vs. many).
+Description truncation ("...") was applied incorrectly sometimes.
+Status text (e.g., "upcoming") wasn't capitalized nicely ("Upcoming").
 
-I went through and addressed some of these points:
 
-Made Core Info Required: I updated the code (props) so that things like the name, imageUrl, startDate, endDate, and status must be provided. 
-Cleaned Up Display:
-Now, the location icon and text only show up if a location is actually provided.
-Same for dates – the date line only renders if we have both start and end dates.
-Fixed the participants text to handle zero, one, or many participants correctly ("0 Participants", "1 Participant", "5 Participants") and only show if the number is provided.
-Made sure the description only gets "..." if it's truly cut short, and the "View More" button only appears when needed. Also added the right signals (aria-expanded) for screen readers on that button.
-Made Buttons Work:
-Set the "View Details" button type correctly.
-Hooked it up so it either runs a function we pass in (onViewDetails) or links to a URL (hackathonUrl). If neither is available, the button is now disabled so users aren't clicking on it.
-Gave it a clearer label for screen readers (e.g., View Details for CoolHack 2025
-Improved Accessibility:
-Added descriptive alt text to the main image like "Banner image for CoolHack 2025.
-Changed the date text color to a lighter gray that's much easier to read against the dark background.
-Added labels (aria-label) to the small icons.
-Refined Styling & Code:
-Removed the fixed width (w-96) and made the card responsive (using max-w-sm w-full so it shrinks nicely but doesn't get too wide).
-Set specific text colors (black or white) for the status badges to guarantee they're readable.
-Made the status text look cleaner by capitalizing the first letter (e.g., "Upcoming").
-Added a title attribute to the hackathon name so if it gets cut off, you can hover to see the full name.
-Updated how the next/image is used to better fit modern Next.js practices for responsive images.
-Potential Next Steps (Things to Consider):
+Button Functionality & Semantics:
+"View Details" button was non-functional (no action/link).
+"View Details" button lacked the correct type attribute, potentially causing form issues.
+Using <button> for "View Details" might be semantically incorrect if it only acts as a link.
 
-I used page.jsx to test the HackathonCard.tsx in components after implementing the fixes
 
-Things can be further improved by:
+Accessibility (a11y):
+Main hackathon image lacked descriptive alt text.
+Informational icons (location, date, etc.) lacked screen reader labels (aria-label).
+"View More" button didn't announce its expanded/collapsed state (aria-expanded).
+"View Details" button lacked a clear screen reader label differentiating it from others.
 
-Handling dates more robustly (maybe using actual Date objects and a library for formatting, or showing relative time like "Starts in 2 days").
-Add loading indicators (skeletons) for when the card data is being fetched.
-wrap the card in an <article> tag for better structure.
-Use next/link for the "View Details" if it links within our app.
-Make the status badge its own reusable component.
-Add tests to make sure the card always looks right with different info.
+
+Data Requirements:
+Essential props (name, image, dates, status) were not marked as required, risking broken cards.
+Styling & Responsiveness:
+The card had a fixed width (w-96), preventing proper responsiveness.
+Status badge text color wasn't explicitly set, risking poor contrast/readability.
+
+
+Fixes Implemented:
+
+Data Requirements:     Made essential props (name, imageUrl, startDate, endDate, status) mandatory.
+Conditional Display:
+Location info now only renders if location data exists.
+Date info now only renders if both start and end dates exist.
+Participants text now only renders if a count is provided, handling 0, 1, and plural cases correctly.
+Description reduced ("...") logic was corrected.
+"View More" button now only renders when the description is actually truncated.
+
+Button Functionality:
+Correct type attribute set for the "View Details" button.
+"View Details" button now executes a passed onViewDetails function or links to hackathonUrl.
+"View Details" button is disabled if neither an action nor a URL is provided.
+
+Accessibility (a11y):
+Added descriptive alt text to the main image (Banner image for Hackathon Name").
+Added aria-label attributes to informational icons.
+Added aria-expanded attribute to the "View More" button.
+Added a clearer aria-label to the "View Details" button ( View Details for Hackathon Name).
+Changed date text color for better contrast.
+
+Styling & Responsiveness:
+Removed fixed width, implemented responsive width using max-w-sm w-full.
+Set explicit text colors (black/white) for status badges to ensure readability.
+Added capitalization for status text display (e.g., "Upcoming").
+Added title attribute to the hackathon name for full visibility on hover if truncated.
+Updated next/image usage for better practices.
+
+
+Suggestions:
+
+Improve date handling (use Date objects, formatting libraries like date-fns, show relative time).
+Implement loading states (e.g., skeleton loaders) while data is fetching.
+Enhance semantic structure by wrapping the card content in an <article> tag.
+Use next/link for the "View Details" button if it navigates within the Next.js application.
+Extract the status badge into its own reusable component.
+Add unit/integration tests to verify card rendering with different data variations.
+
+
+
+
+
+
+
